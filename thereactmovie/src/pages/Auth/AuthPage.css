@@ -1,0 +1,207 @@
+/* 전체 배경 스타일 */
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #141414;
+    color: white;
+}
+
+/* 로그인 및 회원가입 폼 컨테이너 */
+.auth-container {
+    width: 350px;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.85);
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.7);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.auth-container.animating .auth-form {
+    animation: slideOutLeft 0.5s ease-in-out forwards;
+}
+
+.auth-container:not(.animating) .auth-form {
+    animation: slideInRight 0.5s ease-in-out forwards;
+}
+
+/* 나타나는 애니메이션 */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 사라지는 애니메이션 */
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+/* 제목 스타일 */
+.auth-container h1 {
+    font-size: 2em;
+    margin-bottom: 1em;
+    color: #e50914;
+    font-weight: bold;
+}
+
+/* 인풋 및 라벨 스타일 */
+.auth-form label {
+    display: block;
+    margin: 1em 0 0.5em;
+    text-align: left;
+    font-size: 0.9em;
+    color: #b3b3b3;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
+    font-size: 1em;
+}
+
+.auth-form input[type="text"]::placeholder,
+.auth-form input[type="password"]::placeholder {
+    color: #b3b3b3;
+}
+
+/* 에러 메시지 스타일 */
+.error-message {
+    background-color: #e50914;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    text-align: center;
+    margin-top: 15px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* 로그인 및 회원가입 버튼 */
+.auth-button {
+    width: 100%;
+    background-color: #e50914;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.auth-button:hover {
+    background-color: #f40612;
+}
+
+/* 로그인 유지 체크박스 스타일 */
+.keep-login {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    font-size: 0.85em;
+    color: #b3b3b3;
+}
+
+.keep-login input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* 페이지 전환 텍스트 */
+.switch-text {
+    color: #b3b3b3;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+.switch-text:hover {
+    color: #e50914;
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 로그인 성공 메시지 스타일 */
+.success-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4caf50; /* 성공 메시지용 초록색 */
+    color: white;
+    padding: 15px 20px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    text-align: center;
+    max-width: 80%;
+    width: 300px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+    animation: slideUpFade 0.5s ease-in-out, fadeOut 3.5s ease-in-out 2s forwards;
+    z-index: 1000;
+}
+
+/* 에러 메시지 스타일 */
+.error-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #e50914;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    text-align: center;
+    max-width: 80%;
+    width: 300px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+    animation: slideUpFade 0.5s ease-in-out, fadeOut 3.5s ease-in-out 2s forwards;
+    z-index: 1000;
+}
+
+/* 나타나는 애니메이션 */
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* 사라지는 애니메이션 */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 import { FaTicketAlt, FaSearch, FaBell, FaUser, FaBars, FaTimes } from 'react-icons/fa';
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -19,6 +20,11 @@ const Header = () => {
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
+    const handleUserIconClick = () => {
+        console.log("User icon clicked!"); // 아이콘 클릭 확인용
+        navigate('/login'); // 로그인 페이지로 이동
     };
 
     return (
@@ -45,7 +51,7 @@ const Header = () => {
                 <button className="icon-button">
                     <FaBell color="white" />
                 </button>
-                <button className="icon-button">
+                <button className="icon-button" onClick={handleUserIconClick}>
                     <FaUser color="white" />
                 </button>
                 <button className="icon-button mobile-menu-button" onClick={toggleMobileMenu}>

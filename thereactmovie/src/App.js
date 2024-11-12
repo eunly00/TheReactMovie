@@ -1,21 +1,19 @@
-// src/App.js
-import React, { Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/Home/Home"; // Home 페이지
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/Home/Home';
+import AuthPage from './pages/Auth/AuthPage';
 import Header from './components/Header';
+
 function App() {
-  return (
-    <Router>
-      <Suspense fallback={<div>Loading...</div>}>
-      <Header />
-        <div style={{ paddingTop: '69px', minHeight: 'calc(100vh - 80px)' }}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-          </Routes>
-        </div>
-      </Suspense>
-    </Router>
-  );
+    return (
+        <Router>
+            <Header />
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<AuthPage />} /> {/* 로그인 및 회원가입 경로 */}
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
