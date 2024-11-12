@@ -7,17 +7,64 @@ body, .home {
 }
 
 /* 배너 스타일 */
+/* Home.css */
+
+/* 배너 이미지 확대 효과 */
 .banner {
     position: relative;
-    height: 500px;
     background-size: cover;
     background-position: center;
+    height: 70vh;
     display: flex;
-    align-items: center;
+    align-items: flex-end; /* 배너의 하단에 내용 배치 */
+    justify-content: center;
     color: white;
-    padding: 0 50px;
-    margin-bottom: 20px;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.banner:hover {
+    transform: scale(1.05); /* 마우스 오버 시 배너 확대 */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5); /* 그림자 효과 */
+}
+
+.banner-content {
+    position: relative;
+    max-width: 600px;
+    text-align: left; /* 왼쪽 정렬 */
+    margin-left: 20px; /* 배너 왼쪽과의 간격 */
+    margin-bottom: 20px; /* 배너 하단과의 간격 */
+    z-index: 1;
+}
+
+.banner h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.banner p {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.watch-button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
+    background-color: #e50914; /* 기본 빨간색 */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.watch-button:hover {
+    background-color: #f40612; /* hover 시 더 밝은 빨간색 */
+    transform: scale(1.1); /* 크기 확대 효과 */
+    box-shadow: 0px 8px 15px rgba(245, 6, 18, 0.5); /* hover 시 그림자 추가 */
+}
+
 
 .banner::before {
     content: "";
@@ -29,36 +76,8 @@ body, .home {
     background: rgba(0, 0, 0, 0.6);
 }
 
-.banner-content {
-    position: relative;
-    z-index: 1;
-    max-width: 600px;
-}
 
-.banner-content h1 {
-    font-size: 3em;
-    font-weight: bold;
-    margin: 0 0 20px;
-}
 
-.banner-content p {
-    font-size: 1.2em;
-    max-width: 600px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-}
-
-.watch-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #e50914;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
 
 .watch-button:hover {
     background-color: #f40612;

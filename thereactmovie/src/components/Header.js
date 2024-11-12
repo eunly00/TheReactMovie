@@ -1,41 +1,53 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './Header.css';
 import { FaTicketAlt, FaSearch, FaBell, FaUser, FaBars, FaTimes } from 'react-icons/fa';
+import './Header.css';
 
 const Header = () => {
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [username, setUsername] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
+        // 초기 로그인 상태 설정
+        const loggedInStatus = localStorage.getItem('isLoggedIn') === 'true';
+        const storedUsername = localStorage.getItem('username');
+        setIsLoggedIn(loggedInStatus);
+        setUsername(storedUsername || '');
+
+        // storage 이벤트 리스너로 로그인 상태 유지
+        const handleStorageChange = () => {
+            const updatedStatus = localStorage.getItem('isLoggedIn') === 'true';
+            const updatedUsername = localStorage.getItem('username');
+            setIsLoggedIn(updatedStatus);
+            setUsername(updatedUsername || '');
         };
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('storage', handleStorageChange);
+
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('storage', handleStorageChange);
         };
     }, []);
 
-    const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen);
-    };
-
     const handleUserIconClick = () => {
-        console.log("User icon clicked!"); // 아이콘 클릭 확인용
-        navigate('/login'); // 로그인 페이지로 이동
+        if (isLoggedIn) {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('username');
+            setIsLoggedIn(false);
+            setUsername('');
+            navigate('/login');
+        } else {
+            navigate('/login');
+        }
     };
 
     return (
-        <header className={`app-header ${isScrolled ? 'scrolled' : ''}`}>
+        <header className="app-header">
             <div className="header-left">
-                <div className="logo">
-                    <Link to="/">
-                        <FaTicketAlt size={24} color="white" />
-                    </Link>
-                </div>
-                <nav className="nav-links desktop-nav">
+                <Link to="/" className="logo">
+                    <FaTicketAlt size={24} color="white" />
+                </Link>
+                <nav className="nav-links">
                     <ul>
                         <li><Link to="/">홈</Link></li>
                         <li><Link to="/popular">대세 콘텐츠</Link></li>
@@ -52,27 +64,16 @@ const Header = () => {
                     <FaBell color="white" />
                 </button>
                 <button className="icon-button" onClick={handleUserIconClick}>
-                    <FaUser color="white" />
+                    {isLoggedIn ? (
+                        <span className="username-display">{username}</span>
+                    ) : (
+                        <FaUser color="white" />
+                    )}
                 </button>
-                <button className="icon-button mobile-menu-button" onClick={toggleMobileMenu}>
-                    {isMobileMenuOpen ? <FaTimes color="white" /> : <FaBars color="white" />}
+                <button className="icon-button">
+                    <FaBars color="white" />
                 </button>
             </div>
-            {isMobileMenuOpen && (
-                <div className="mobile-nav open">
-                    <button className="close-button" onClick={toggleMobileMenu}>
-                        <FaTimes color="white" />
-                    </button>
-                    <nav>
-                        <ul>
-                            <li><Link to="/" onClick={toggleMobileMenu}>홈</Link></li>
-                            <li><Link to="/popular" onClick={toggleMobileMenu}>대세 콘텐츠</Link></li>
-                            <li><Link to="/wishlist" onClick={toggleMobileMenu}>내가 찜한 리스트</Link></li>
-                            <li><Link to="/search" onClick={toggleMobileMenu}>찾아보기</Link></li>
-                        </ul>
-                    </nav>
-                </div>
-            )}
         </header>
     );
 };

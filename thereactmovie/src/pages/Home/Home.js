@@ -57,7 +57,7 @@ const HomePage = () => {
                     <div className="banner-content">
                         <h1>{featuredMovie.original_title}</h1>
                         <p>{featuredMovie.overview}</p>
-                        <button className="watch-button">바로보기</button>
+                        <button className="watch-button">자세히보기</button>
                     </div>
                 </div>
             )}
