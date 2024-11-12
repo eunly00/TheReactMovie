@@ -43,6 +43,6 @@
   },
   "devDependencies": {
     "gh-pages": "^6.2.0"
-  }
-  
+  },
+  "homepage": "https://eunly00.github.io/TheReactMovie"
 }
