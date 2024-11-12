@@ -18,6 +18,7 @@ const HomePage = () => {
     });
 
     const scrollRefs = useRef(sections.map(() => React.createRef()));
+    const recommendationsRef = useRef(null); // 추천 영화의 스크롤을 위한 참조
 
     useEffect(() => {
         const loadInitialMovies = async () => {
@@ -65,6 +66,14 @@ const HomePage = () => {
 
         setRecommendations(updatedRecommendations);
         localStorage.setItem('recommendations', JSON.stringify(updatedRecommendations)); // 로컬 스토리지에 저장
+    };
+
+    const scrollRecommendationsLeft = () => {
+        recommendationsRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+    };
+
+    const scrollRecommendationsRight = () => {
+        recommendationsRef.current.scrollBy({ left: 300, behavior: 'smooth' });
     };
 
     return (
@@ -115,7 +124,10 @@ const HomePage = () => {
             <div className="content-section">
                 <h2>내가 찜한 콘텐츠</h2>
                 <div className="scroll-container">
-                    <div className="content-row-container">
+                    <button className="scroll-button left" onClick={scrollRecommendationsLeft}>
+                        &#10094;
+                    </button>
+                    <div className="content-row-container" ref={recommendationsRef}>
                         {recommendations.map((movie) => (
                             <GridCards
                                 key={movie.id}
@@ -127,6 +139,9 @@ const HomePage = () => {
                             />
                         ))}
                     </div>
+                    <button className="scroll-button right" onClick={scrollRecommendationsRight}>
+                        &#10095;
+                    </button>
                 </div>
             </div>
         </div>
