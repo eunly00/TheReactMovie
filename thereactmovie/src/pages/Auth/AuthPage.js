@@ -19,9 +19,13 @@ const AuthPage = () => {
         const storedUsername = localStorage.getItem('username');
         const storedPassword = localStorage.getItem('password');
 
+        // 계정별로 key 값을 다르게 설정하여 로그인 상태와 추천 목록을 관리
+        const isLoggedInKey = `${username}_isLoggedIn`;
+        const recommendationsKey = `${username}_recommendations`;
+
         if (storedUsername === username && storedPassword === password) {
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('username', username);
+            localStorage.setItem(isLoggedInKey, 'true');
+            localStorage.setItem('username', username); // 현재 로그인된 사용자 이름 저장
             setErrorMessage('');
             setSuccessMessage('로그인 성공!');
 
@@ -42,6 +46,10 @@ const AuthPage = () => {
             return;
         }
 
+        // 계정별로 key 값을 다르게 설정
+        const isLoggedInKey = `${username}_isLoggedIn`;
+        const recommendationsKey = `${username}_recommendations`;
+
         if (localStorage.getItem('username') === username) {
             setErrorMessage('이미 존재하는 아이디입니다.');
             return;
@@ -49,6 +57,8 @@ const AuthPage = () => {
 
         localStorage.setItem('username', username);
         localStorage.setItem('password', password);
+        localStorage.setItem(isLoggedInKey, 'false'); // 처음에는 로그아웃 상태로 저장
+        localStorage.setItem(recommendationsKey, JSON.stringify([])); // 빈 추천 리스트로 초기화
         setErrorMessage('');
         alert('회원가입 성공! 로그인해주세요.');
         setIsLoginPage(true);

@@ -4,7 +4,7 @@ import HomePage from './pages/Home/Home';
 import AuthPage from './pages/Auth/AuthPage';
 import Header from './components/Header';
 import MovieDetailPage from './pages/MovieDetailPage'; // 상세정보 페이지
-
+import PopularPage from './pages/PopularPage'; // 대세 콘텐츠 페이지 추가
 function App() {
     return (
         <Router>
@@ -13,6 +13,7 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<AuthPage />} /> {/* 로그인 및 회원가입 경로 */}
                 <Route path="/movie/:movieId" element={<MovieDetailPage />} /> {/* 영화 상세정보 페이지 */}
+                <Route path="/popular" element={<PopularPage />} />
             </Routes>
         </Router>
     );

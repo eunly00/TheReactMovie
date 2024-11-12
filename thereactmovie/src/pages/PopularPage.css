@@ -1,0 +1,97 @@
+/* src/pages/PopularPage.css */
+
+.popular-page {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #141414;
+    padding: 120px 20px; /* 헤더 공간 확보 */
+    color: white;
+}
+
+.view-toggle-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.view-toggle-button {
+    padding: 10px 20px;
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.view-toggle-button:hover {
+    background-color: #f40612;
+}
+
+.infinite-scroll-view {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.loading-text {
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.load-more-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 10px 20px;
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.load-more-button:hover {
+    background-color: #f40612;
+    transform: scale(1.1);
+}
+
+.top-button {
+    position: fixed;
+    bottom: 40px;
+    right: 30px;
+    background-color: #e50914; /* 넷플릭스 색상 */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.top-button:hover {
+    transform: scale(1.1);
+    background-color: #f40612;
+}
+
+.loading-text {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 18px;
+    color: #888;
+}

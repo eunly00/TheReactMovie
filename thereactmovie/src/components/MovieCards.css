@@ -1,0 +1,13 @@
+/* GridCards.css */
+
+.grid-card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
+
+.loading {
+    text-align: center;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 10px 0;
+}

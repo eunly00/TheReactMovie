@@ -4,21 +4,23 @@ import './Home.css';
 import GridCards from '../../components/GridCards';
 
 const HomePage = () => {
+    const username = localStorage.getItem('username'); // 현재 로그인한 사용자의 이름 가져오기
+
     const [sections, setSections] = useState([
         { title: '대세 콘텐츠', category: 'popular', movies: [], page: 1 },
         { title: '최신 콘텐츠', category: 'now_playing', movies: [], page: 1 },
         { title: '최고 평점 콘텐츠', category: 'top_rated', movies: [], page: 1 },
     ]);
     const [featuredMovie, setFeaturedMovie] = useState(null);
-    const [genres, setGenres] = useState({}); // 장르 정보 저장
+    const [genres, setGenres] = useState({});
     const [recommendations, setRecommendations] = useState(() => {
-        // 추천 영화 목록을 Local Storage에서 가져옴
-        const savedRecommendations = localStorage.getItem('recommendations');
+        // 현재 계정의 추천 영화 목록을 Local Storage에서 가져옴
+        const savedRecommendations = localStorage.getItem(`${username}_recommendations`);
         return savedRecommendations ? JSON.parse(savedRecommendations) : [];
     });
 
     const scrollRefs = useRef(sections.map(() => React.createRef()));
-    const recommendationsRef = useRef(null); // 추천 영화의 스크롤을 위한 참조
+    const recommendationsRef = useRef(null);
 
     useEffect(() => {
         const loadInitialMovies = async () => {
@@ -38,7 +40,12 @@ const HomePage = () => {
         loadInitialMovies();
     }, []);
 
-    // TMDB API에서 장르 목록을 가져와 장르 ID와 이름 매핑 객체를 생성
+    // 계정 변경 시 추천 영화 목록 업데이트
+    useEffect(() => {
+        const savedRecommendations = localStorage.getItem(`${username}_recommendations`);
+        setRecommendations(savedRecommendations ? JSON.parse(savedRecommendations) : []);
+    }, [username]);
+
     const fetchGenres = async () => {
         const endpoint = `${API_URL}genre/movie/list?api_key=${API_KEY}&language=ko-KR`;
         const response = await fetch(endpoint);
@@ -50,7 +57,6 @@ const HomePage = () => {
         setGenres(genresMap);
     };
 
-    // 영화 데이터를 가져오는 함수
     const fetchMovies = async (category, page) => {
         const endpoint = `${API_URL}movie/${category}?api_key=${API_KEY}&language=ko-KR&page=${page}`;
         const response = await fetch(endpoint);
@@ -58,14 +64,13 @@ const HomePage = () => {
         return data.results.slice(0, 8);
     };
 
-    // 추천 영화 목록에 추가 또는 제거하는 함수
     const toggleRecommendation = (movie) => {
         const updatedRecommendations = recommendations.some((m) => m.id === movie.id)
             ? recommendations.filter((m) => m.id !== movie.id) // 삭제
             : [...recommendations, movie]; // 추가
 
         setRecommendations(updatedRecommendations);
-        localStorage.setItem('recommendations', JSON.stringify(updatedRecommendations)); // 로컬 스토리지에 저장
+        localStorage.setItem(`${username}_recommendations`, JSON.stringify(updatedRecommendations)); // 계정별로 저장
     };
 
     const scrollRecommendationsLeft = () => {
@@ -107,8 +112,8 @@ const HomePage = () => {
                                     key={movie.id}
                                     movie={movie}
                                     onClick={() => toggleRecommendation(movie)}
-                                    isRecommended={recommendations.some((m) => m.id === movie.id)} // 추천된 영화인지 확인
-                                    genres={movie.genre_ids.map((genreId) => genres[genreId]).join(', ')} // 장르 전달
+                                    isRecommended={recommendations.some((m) => m.id === movie.id)}
+                                    genres={movie.genre_ids.map((genreId) => genres[genreId]).join(', ')}
                                     image={movie.poster_path ? `${IMAGE_BASE_URL}w500${movie.poster_path}` : null}
                                 />
                             ))}
@@ -133,7 +138,7 @@ const HomePage = () => {
                                 key={movie.id}
                                 movie={movie}
                                 onClick={() => toggleRecommendation(movie)}
-                                isRecommended={true} // 추천 영화 디자인을 다르게
+                                isRecommended={true}
                                 genres={movie.genre_ids.map((genreId) => genres[genreId]).join(', ')}
                                 image={movie.poster_path ? `${IMAGE_BASE_URL}w500${movie.poster_path}` : null}
                             />
