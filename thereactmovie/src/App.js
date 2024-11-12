@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
-
+// src/App.js
+import React, { Suspense } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/Home/Home"; // Home 페이지
+import Header from './components/Header';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
+      <Header />
+        <div style={{ paddingTop: '69px', minHeight: 'calc(100vh - 80px)' }}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+          </Routes>
+        </div>
+      </Suspense>
+    </Router>
   );
 }
 

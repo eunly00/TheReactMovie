@@ -1,0 +1,123 @@
+/* 전체 페이지 다크 테마 */
+body, .home {
+    background-color: #141414;
+    color: #ffffff;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* 배너 스타일 */
+.banner {
+    position: relative;
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 0 50px;
+    margin-bottom: 20px;
+}
+
+.banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.banner-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+}
+
+.banner-content h1 {
+    font-size: 3em;
+    font-weight: bold;
+    margin: 0 0 20px;
+}
+
+.banner-content p {
+    font-size: 1.2em;
+    max-width: 600px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.watch-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.watch-button:hover {
+    background-color: #f40612;
+}
+
+/* 섹션 스타일 */
+.content-section {
+    margin-bottom: 40px;
+}
+
+.content-section h2 {
+    color: white;
+    font-size: 1.8em;
+    font-weight: bold;
+    padding-left: 50px;
+    margin: 20px 0;
+}
+
+/* 수평 스크롤 컨테이너 */
+.scroll-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.content-row-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 0 50px;
+    scrollbar-width: none;
+}
+
+.content-row-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* 스크롤 버튼 */
+.scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2em;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.scroll-button.left {
+    left: 10px;
+}
+
+.scroll-button.right {
+    right: 10px;
+}
+
+.scroll-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}

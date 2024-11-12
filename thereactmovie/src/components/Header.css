@@ -1,0 +1,97 @@
+/* 헤더 배경과 기본 스타일 설정 */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #141414; /* 어두운 배경 */
+    color: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.app-header.scrolled {
+    background-color: #000000; /* 스크롤 시 더 어두운 배경 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.nav-links ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-links ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-links ul li a:hover {
+    color: #e50914; /* 넷플릭스 스타일의 강조색 */
+}
+
+.header-right .icon-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2em;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+/* 모바일 메뉴 스타일 */
+.mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #141414;
+    color: white;
+    padding-top: 60px;
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+    z-index: 101;
+}
+
+.mobile-nav.open {
+    display: block;
+    transform: translateX(0);
+}
+
+.mobile-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.mobile-nav ul li {
+    margin: 20px 0;
+}
+
+.mobile-nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    color: white;
+    cursor: pointer;
+}

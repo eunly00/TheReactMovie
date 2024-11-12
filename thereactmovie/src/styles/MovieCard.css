@@ -1,0 +1,24 @@
+/* src/styles/MovieCard.css */
+.movie-card {
+    width: 150px;
+    margin: 0 5px;
+    transition: transform 0.3s;
+    cursor: pointer;
+  }
+  
+  .movie-card img {
+    width: 100%;
+    border-radius: 4px;
+  }
+  
+  .movie-title {
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 5px;
+    color: white;
+  }
+  
+  .movie-card:hover {
+    transform: scale(1.05);
+  }
+  
