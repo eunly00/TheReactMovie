@@ -36,7 +36,12 @@ body, .home {
     margin-bottom: 20px; /* 배너 하단과의 간격 */
     z-index: 1;
 }
-
+.content-section h2 {
+    color: white;  /* 타이틀을 하얀색으로 설정 */
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
 .banner h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
