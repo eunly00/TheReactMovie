@@ -1,0 +1,40 @@
+.search-page {
+    padding: 100px 20px 20px; /* 헤더 아래 충분한 공간 확보 */
+    position: relative;
+}
+
+.filter-container {
+    position: sticky;
+    top: 60px; /* 헤더 높이만큼 떨어뜨려 헤더가 가려지지 않도록 설정 */
+    z-index: 100;
+    background-color: #141414;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 가독성 향상을 위한 그림자 */
+}
+
+.filter-container select, 
+.clear-filters-button, 
+.view-toggle-button {
+    padding: 8px;
+    background-color: #333;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.clear-filters-button, .view-toggle-button {
+    background-color: #e50914;
+    color: white;
+}
+
+.clear-filters-button:hover, .view-toggle-button:hover,
+.filter-container select:hover {
+    background-color: #f40612;
+}
