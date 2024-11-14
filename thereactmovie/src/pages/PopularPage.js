@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { API_URL, API_KEY, IMAGE_BASE_URL } from '../Config';
 import MovieCards from '../components/MovieCards';
+import MovieTableView from '../components/MovieTableView';
 import './PopularPage.css';
 
 const PopularPage = () => {
@@ -74,7 +75,7 @@ const PopularPage = () => {
 
             {isTableView ? (
                 <div className="table-view">
-                    {/* 테이블 뷰 컴포넌트 삽입 */}
+                     <MovieTableView movies={movies} toggleRecommendation={toggleRecommendation} recommendations={recommendations} />
                 </div>
             ) : (
                 <div className="infinite-scroll-view">

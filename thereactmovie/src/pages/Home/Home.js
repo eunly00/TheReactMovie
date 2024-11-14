@@ -2,10 +2,11 @@ import React, { useEffect, useState, useRef } from 'react';
 import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../Config';
 import './Home.css';
 import GridCards from '../../components/GridCards';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
     const username = localStorage.getItem('username'); // 현재 로그인한 사용자의 이름 가져오기
-
+    const navigate = useNavigate();
     const [sections, setSections] = useState([
         { title: '대세 콘텐츠', category: 'popular', movies: [], page: 1 },
         { title: '최신 콘텐츠', category: 'now_playing', movies: [], page: 1 },
@@ -80,6 +81,10 @@ const HomePage = () => {
     const scrollRecommendationsRight = () => {
         recommendationsRef.current.scrollBy({ left: 300, behavior: 'smooth' });
     };
+        // 영화 상세 페이지로 이동하는 함수
+    const handleMovieClick = (movieId) => {
+            navigate(`/movie/${movieId}`);
+    };
 
     return (
         <div className="home">
@@ -94,7 +99,7 @@ const HomePage = () => {
                         <p className="genres">
                             {featuredMovie.genre_ids.map((genreId) => genres[genreId]).join(', ')}
                         </p>
-                        <button className="watch-button">바로보기</button>
+                        <button className="watch-button" onClick={() => handleMovieClick(featuredMovie.id)}>바로보기</button>
                     </div>
                 </div>
             )}
@@ -124,6 +129,8 @@ const HomePage = () => {
                     </div>
                 </div>
             ))}
+
+        
 
             {/* 내가 찜한 콘텐츠 (추천 영화만) */}
             <div className="content-section">
