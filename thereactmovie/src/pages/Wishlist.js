@@ -5,7 +5,7 @@ import MovieTableView from '../components/MovieTableView';
 import './WishlistPage.css';
 
 const WishlistPage = () => {
-    const username = localStorage.getItem('username'); // 현재 로그인한 사용자 이름 가져오기
+    const username = localStorage.getItem('loggedInUser'); // 현재 로그인한 사용자 이름 가져오기
     const [recommendations, setRecommendations] = useState([]);
     const [isTableView, setIsTableView] = useState(false); // 초기 view 설정 (테이블/무한스크롤)
   

@@ -8,28 +8,33 @@ const LoginPage = ({ switchToSignUp }) => {
     const [password, setPassword] = useState('');
     const [keepLogin, setKeepLogin] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [successMessage, setSuccessMessage] = useState(''); // 로그인 성공 메시지 상태
+    const [successMessage, setSuccessMessage] = useState('');
     const navigate = useNavigate();
 
     const handleLogin = (e) => {
         e.preventDefault();
-        const storedUsername = localStorage.getItem('username');
-        const storedPassword = localStorage.getItem('password');
 
-        if (storedUsername === username && storedPassword === password) {
-            // 로그인 상태 저장
+        // 저장된 모든 사용자 계정을 가져옴
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const user = users.find((user) => user.id === username && user.password === password);
+
+        if (user) {
+            // 로그인 성공 시 처리
             localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('loggedInUser', username); // 현재 로그인한 사용자 이름 저장
+            localStorage.setItem('loggedInUser', username); // 현재 로그인한 사용자 저장
+            if (keepLogin) {
+                localStorage.setItem('keepLogin', 'true');
+            }
             setErrorMessage('');
-            setSuccessMessage('로그인 성공!'); // 성공 메시지 설정
+            setSuccessMessage('로그인 성공!');
 
             setTimeout(() => {
-                setSuccessMessage(''); // 성공 메시지 숨김
+                setSuccessMessage('');
                 navigate('/'); // 메인 화면으로 이동
-                window.location.reload(); // 새로고침을 통해 로그인 상태 업데이트
-            }, 2000); // 2초 후 성공 메시지 사라짐
+                window.location.reload();
+            }, 2000); // 2초 후 성공 메시지 숨김
         } else {
-            setErrorMessage(storedUsername !== username ? '해당 계정이 존재하지 않습니다.' : '비밀번호가 일치하지 않습니다.');
+            setErrorMessage('해당 계정이 존재하지 않거나 비밀번호가 일치하지 않습니다.');
         }
     };
 

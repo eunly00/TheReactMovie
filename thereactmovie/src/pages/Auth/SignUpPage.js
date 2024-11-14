@@ -5,19 +5,25 @@ const SignUpPage = ({ switchToLogin }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [termsAccepted, setTermsAccepted] = useState(false); // 약관 동의 상태 추가
+    const [termsAccepted, setTermsAccepted] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [successMessage, setSuccessMessage] = useState(''); // 회원가입 성공 메시지 상태
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleSignUp = (e) => {
         e.preventDefault();
 
+        // 유효성 검사
         if (password !== confirmPassword) {
             setErrorMessage('비밀번호가 일치하지 않습니다.');
             return;
         }
 
-        if (localStorage.getItem('username') === username) {
+        // 저장된 유저 목록 가져오기
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+
+        // 이미 존재하는 계정 확인
+        const userExists = users.some(user => user.id === username);
+        if (userExists) {
             setErrorMessage('이미 존재하는 아이디입니다.');
             return;
         }
@@ -27,8 +33,12 @@ const SignUpPage = ({ switchToLogin }) => {
             return;
         }
 
-        localStorage.setItem('username', username);
-        localStorage.setItem('password', password);
+        // 새로운 사용자 추가 및 저장
+        const newUser = { id: username, password: password };
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+
+        // 회원가입 성공 메시지 표시
         setErrorMessage('');
         setSuccessMessage('회원가입 성공! 로그인해주세요.');
 
@@ -36,7 +46,7 @@ const SignUpPage = ({ switchToLogin }) => {
         setTimeout(() => {
             setSuccessMessage('');
             switchToLogin();
-        }, 2000); // 2초 후 로그인 화면으로 이동
+        }, 2000);
     };
 
     return (

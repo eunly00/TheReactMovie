@@ -3,10 +3,34 @@ import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../Config';
 import './Home.css';
 import GridCards from '../../components/GridCards';
 import { useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
+
+// 모달 스타일 설정
+const modalStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: '#181818',
+        color: '#fff',
+        border: 'none',
+        borderRadius: '8px',
+        padding: '2rem',
+        textAlign: 'center',
+    },
+    overlay: {
+        backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    },
+};
 
 const HomePage = () => {
-    const username = localStorage.getItem('username'); // 현재 로그인한 사용자의 이름 가져오기
+    const username = localStorage.getItem('loggedInUser'); // 현재 로그인한 사용자의 이름 가져오기
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true'; // 로그인 여부 확인
     const navigate = useNavigate();
+
     const [sections, setSections] = useState([
         { title: '대세 콘텐츠', category: 'popular', movies: [], page: 1 },
         { title: '최신 콘텐츠', category: 'now_playing', movies: [], page: 1 },
@@ -15,10 +39,10 @@ const HomePage = () => {
     const [featuredMovie, setFeaturedMovie] = useState(null);
     const [genres, setGenres] = useState({});
     const [recommendations, setRecommendations] = useState(() => {
-        // 현재 계정의 추천 영화 목록을 Local Storage에서 가져옴
         const savedRecommendations = localStorage.getItem(`${username}_recommendations`);
         return savedRecommendations ? JSON.parse(savedRecommendations) : [];
     });
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const scrollRefs = useRef(sections.map(() => React.createRef()));
     const recommendationsRef = useRef(null);
@@ -41,7 +65,6 @@ const HomePage = () => {
         loadInitialMovies();
     }, []);
 
-    // 계정 변경 시 추천 영화 목록 업데이트
     useEffect(() => {
         const savedRecommendations = localStorage.getItem(`${username}_recommendations`);
         setRecommendations(savedRecommendations ? JSON.parse(savedRecommendations) : []);
@@ -66,6 +89,12 @@ const HomePage = () => {
     };
 
     const toggleRecommendation = (movie) => {
+        if (!isLoggedIn) {
+            // 로그인되어 있지 않으면 모달을 띄워 로그인 요청
+            setIsModalOpen(true);
+            return;
+        }
+
         const updatedRecommendations = recommendations.some((m) => m.id === movie.id)
             ? recommendations.filter((m) => m.id !== movie.id) // 삭제
             : [...recommendations, movie]; // 추가
@@ -74,16 +103,16 @@ const HomePage = () => {
         localStorage.setItem(`${username}_recommendations`, JSON.stringify(updatedRecommendations)); // 계정별로 저장
     };
 
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     const scrollRecommendationsLeft = () => {
         recommendationsRef.current.scrollBy({ left: -300, behavior: 'smooth' });
     };
 
     const scrollRecommendationsRight = () => {
         recommendationsRef.current.scrollBy({ left: 300, behavior: 'smooth' });
-    };
-        // 영화 상세 페이지로 이동하는 함수
-    const handleMovieClick = (movieId) => {
-            navigate(`/movie/${movieId}`);
     };
 
     return (
@@ -99,7 +128,7 @@ const HomePage = () => {
                         <p className="genres">
                             {featuredMovie.genre_ids.map((genreId) => genres[genreId]).join(', ')}
                         </p>
-                        <button className="watch-button" onClick={() => handleMovieClick(featuredMovie.id)}>바로보기</button>
+                        <button className="watch-button">바로보기</button>
                     </div>
                 </div>
             )}
@@ -130,9 +159,6 @@ const HomePage = () => {
                 </div>
             ))}
 
-        
-
-            {/* 내가 찜한 콘텐츠 (추천 영화만) */}
             <div className="content-section">
                 <h2>내가 찜한 콘텐츠</h2>
                 <div className="scroll-container">
@@ -156,6 +182,20 @@ const HomePage = () => {
                     </button>
                 </div>
             </div>
+
+            {/* 모달 창 */}
+            <Modal
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+                style={modalStyles}
+                ariaHideApp={false}
+            >
+                <h2>로그인이 필요합니다</h2>
+                <p>추천 기능을 사용하려면 로그인이 필요합니다.</p>
+                <button onClick={() => { closeModal(); navigate('/login'); }} className="modal-button">
+                    로그인하기
+                </button>
+            </Modal>
         </div>
     );
 };

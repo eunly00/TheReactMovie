@@ -6,19 +6,18 @@ import './Header.css';
 const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUsername] = useState('');
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false); // 사이드바 상태 관리
     const navigate = useNavigate();
 
     useEffect(() => {
-        // 초기 로그인 상태 설정
         const loggedInStatus = localStorage.getItem('isLoggedIn') === 'true';
-        const storedUsername = localStorage.getItem('username');
+        const storedUsername = localStorage.getItem('loggedInUser'); // 'loggedInUser' 사용
         setIsLoggedIn(loggedInStatus);
         setUsername(storedUsername || '');
 
-        // storage 이벤트 리스너로 로그인 상태 유지
         const handleStorageChange = () => {
             const updatedStatus = localStorage.getItem('isLoggedIn') === 'true';
-            const updatedUsername = localStorage.getItem('username');
+            const updatedUsername = localStorage.getItem('loggedInUser');
             setIsLoggedIn(updatedStatus);
             setUsername(updatedUsername || '');
         };
@@ -32,13 +31,17 @@ const Header = () => {
     const handleUserIconClick = () => {
         if (isLoggedIn) {
             localStorage.removeItem('isLoggedIn');
-            localStorage.removeItem('username');
+            localStorage.removeItem('loggedInUser');
             setIsLoggedIn(false);
             setUsername('');
             navigate('/login');
         } else {
             navigate('/login');
         }
+    };
+
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
     };
 
     return (
@@ -70,10 +73,25 @@ const Header = () => {
                         <FaUser color="white" />
                     )}
                 </button>
-                <button className="icon-button">
-                    <FaBars color="white" />
+                <button className="icon-button" onClick={toggleSidebar}>
+                    {isSidebarOpen ? <FaTimes color="white" /> : <FaBars color="white" />}
                 </button>
             </div>
+
+            {/* Sidebar 메뉴 */}
+            {isSidebarOpen && (
+                <div className="sidebar">
+                    <button className="close-sidebar" onClick={toggleSidebar}>
+                        <FaTimes color="white" />
+                    </button>
+                    <ul className="sidebar-menu">
+                        <li><Link to="/" onClick={toggleSidebar}>홈</Link></li>
+                        <li><Link to="/popular" onClick={toggleSidebar}>대세 콘텐츠</Link></li>
+                        <li><Link to="/wishlist" onClick={toggleSidebar}>내가 찜한 리스트</Link></li>
+                        <li><Link to="/search" onClick={toggleSidebar}>찾아보기</Link></li>
+                    </ul>
+                </div>
+            )}
         </header>
     );
 };

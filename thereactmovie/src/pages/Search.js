@@ -5,7 +5,7 @@ import MovieTableView from '../components/MovieTableView';
 import './SearchPage.css';
 
 const SearchPage = () => {
-    const username = localStorage.getItem('username');
+    const username = localStorage.getItem('loggedInUser');
     const [movies, setMovies] = useState([]);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);

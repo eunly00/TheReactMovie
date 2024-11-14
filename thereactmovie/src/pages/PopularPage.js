@@ -5,7 +5,7 @@ import MovieTableView from '../components/MovieTableView';
 import './PopularPage.css';
 
 const PopularPage = () => {
-    const username = localStorage.getItem('username');
+    const username = localStorage.getItem('loggedInUser');
     const [movies, setMovies] = useState([]);
     const [isTableView, setIsTableView] = useState(false);
     const [page, setPage] = useState(1);
