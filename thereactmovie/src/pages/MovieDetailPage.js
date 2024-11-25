@@ -34,7 +34,6 @@ const MovieDetailPage = () => {
                     </p>
                     <p className="movie-release-date">Release Date: {movie.release_date}</p>
                     <p className="movie-rating">Rating: {movie.vote_average}</p>
-                    <button className="watch-button">바로보기</button>
                 </div>
             </div>
         </div>

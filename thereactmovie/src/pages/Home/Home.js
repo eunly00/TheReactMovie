@@ -90,17 +90,16 @@ const HomePage = () => {
 
     const toggleRecommendation = (movie) => {
         if (!isLoggedIn) {
-            // 로그인되어 있지 않으면 모달을 띄워 로그인 요청
             setIsModalOpen(true);
             return;
         }
 
         const updatedRecommendations = recommendations.some((m) => m.id === movie.id)
-            ? recommendations.filter((m) => m.id !== movie.id) // 삭제
-            : [...recommendations, movie]; // 추가
+            ? recommendations.filter((m) => m.id !== movie.id)
+            : [...recommendations, movie];
 
         setRecommendations(updatedRecommendations);
-        localStorage.setItem(`${username}_recommendations`, JSON.stringify(updatedRecommendations)); // 계정별로 저장
+        localStorage.setItem(`${username}_recommendations`, JSON.stringify(updatedRecommendations));
     };
 
     const closeModal = () => {
@@ -113,6 +112,10 @@ const HomePage = () => {
 
     const scrollRecommendationsRight = () => {
         recommendationsRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+    };
+
+    const navigateToMovieDetail = (movieId) => {
+        navigate(`/movie/${movieId}`);
     };
 
     return (
@@ -128,7 +131,12 @@ const HomePage = () => {
                         <p className="genres">
                             {featuredMovie.genre_ids.map((genreId) => genres[genreId]).join(', ')}
                         </p>
-                        <button className="watch-button">바로보기</button>
+                        <button
+                            className="watch-button"
+                            onClick={() => navigateToMovieDetail(featuredMovie.id)}
+                        >
+                            자세히보기
+                        </button>
                     </div>
                 </div>
             )}
@@ -183,7 +191,6 @@ const HomePage = () => {
                 </div>
             </div>
 
-            {/* 모달 창 */}
             <Modal
                 isOpen={isModalOpen}
                 onRequestClose={closeModal}
