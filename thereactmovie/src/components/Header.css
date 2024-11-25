@@ -1,25 +1,35 @@
-/* 헤더 배경과 기본 스타일 설정 */
+/* 스크롤되지 않았을 때 헤더 기본 스타일 */
 .app-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    background-color: #141414; /* 어두운 배경 */
+    padding: 20px 30px;
+    background-color: rgba(20, 20, 20, 0.8); /* 투명한 배경 */
     color: white;
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 100;
+    transition: all 0.4s ease-in-out; /* 애니메이션 부드럽게 */
+    box-shadow: none;
 }
 
+/* 스크롤되었을 때 헤더 스타일 */
 .app-header.scrolled {
-    background-color: #000000; /* 스크롤 시 더 어두운 배경 */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    background-color: #141414; /* 더 어두운 배경 */
+    padding: 10px 30px; /* 패딩 줄이기 */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8); /* 그림자 추가 */
+    transform: translateY(0); /* 아래로 밀려오는 효과 */
 }
 
-.logo {
-    font-size: 1.5em;
-    font-weight: bold;
+/* 로고와 내비게이션 스타일 */
+.logo img {
+    height: 50px; /* 기본 로고 크기 */
+    transition: height 0.4s ease-in-out; /* 크기 변환 */
+}
+
+.app-header.scrolled .logo img {
+    height: 40px; /* 스크롤 시 로고 크기 줄이기 */
 }
 
 .nav-links ul {
