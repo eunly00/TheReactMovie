@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes, FaUser, FaSearch, FaBell } from 'react-icons/fa';
 import './Header.css';
+import logo from '../logo.png'
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false); // 스크롤 상태 관리
@@ -55,7 +56,7 @@ const Header = () => {
     return (
         <header className={`app-header ${isScrolled ? 'scrolled' : ''}`}>
             <div className="header-left">
-                <Link to="/" className="logo">LOGO</Link>
+                <Link to="/" className="logo"><img src={logo} alt="Rio Logo" style={{ height: '40px', width: 'auto' }} /></Link>
                 <nav className="nav-links">
                     <ul>
                         <li><Link to="/">홈</Link></li>
