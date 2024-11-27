@@ -11,3 +11,11 @@
     font-size: 18px;
     padding: 10px 0;
 }
+
+/* 포스터 확대 효과 */
+.movie-card img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* 모바일 환경의 터치 효과는 JavaScript에서 처리 */
