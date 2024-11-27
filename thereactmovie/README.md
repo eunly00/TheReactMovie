@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# 영화 추천 웹 애플리케이션
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+이 프로젝트는 Netflix 스타일의 영화 추천 웹 애플리케이션입니다. 사용자 인증, 영화 탐색, 개인화된 영화 추천 기능을 제공합니다. **React.js**로 개발되었으며, **TMDB (The Movie Database) API**를 사용하여 영화 데이터를 가져옵니다.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 주요 기능
 
-### `npm start`
+### 1. **사용자 인증**
+- **회원가입**: 유효한 이메일과 TMDB API 키를 입력하여 계정을 생성할 수 있습니다.
+- **로그인**: 생성된 이메일과 API 키를 사용하여 로그인할 수 있습니다.
+- **세션 관리**: 로그인 상태와 사용자별 데이터를 로컬 스토리지에 저장합니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 2. **홈 페이지**
+- **추천 배너**: 인기 있는 영화 중 하나를 랜덤으로 배너에 표시합니다.
+- **영화 섹션**:
+  - 대세 콘텐츠
+  - 최신 콘텐츠
+  - 최고 평점 콘텐츠
+- **호버 및 터치 효과**: 영화 카드에 마우스를 올리거나(데스크탑), 터치(모바일) 시 확대 효과.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 3. **영화 추천**
+- 특정 영화를 추천 목록에 추가하거나 제거할 수 있습니다.
+- 추천 기능은 로그인 상태에서만 가능합니다.
 
-### `npm test`
+### 4. **영화 상세 페이지**
+- 영화 카드 또는 배너에서 "바로보기" 버튼을 클릭하면 해당 영화의 상세 정보를 확인할 수 있습니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 5. **반응형 디자인**
+- 데스크탑과 모바일 환경에 최적화된 디자인.
+- 모바일 사용자를 위한 터치 효과와 사이드바 네비게이션 제공.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 기술 스택
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### **프론트엔드**
+- **React.js**: UI 구성의 핵심 라이브러리.
+- **React Router**: 페이지 간 라우팅 및 내비게이션 처리.
+- **Ant Design**: 스타일이 적용된 그리드 레이아웃과 반응형 디자인.
+- **CSS3**: 커스텀 애니메이션 및 스타일링.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### **API**
+- **TMDB API**: 영화, 장르, 상세 정보 등을 가져오는 데 사용.
 
-### `npm run eject`
+### **상태 관리**
+- **로컬 스토리지**: 사용자 인증, 추천 목록 및 상태 저장.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 설치 방법
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### **필수 조건**
+- Node.js (>=14.x.x)
+- npm (>=6.x.x)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### **설치한 npm 패키지**
+아래 명령어를 실행하여 필수 의존성을 설치하세요.
 
-## Learn More
+```bash
+npm install react-router-dom      # 페이지 이동 및 라우팅
+npm install antd                  # Ant Design UI 컴포넌트
+npm install react-icons           # 아이콘 추가
+npm install react-modal           # 로그인 관련 모달
+npm install --save-dev @babel/core # Babel (필요한 경우)
+npm install axios                 # HTTP 요청용 클라이언트
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+의존성 설치
+레포지토리를 클론한 뒤, 프로젝트 폴더에서 다음 명령어를 실행하세요.
