@@ -31,6 +31,20 @@
     font-weight: bold;
     transition: background-color 0.3s ease;
 }
+.csv-download-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.csv-download-button:hover {
+    background-color: #0056b3;
+}
 
 .view-toggle-button:hover {
     background-color: #e50914;

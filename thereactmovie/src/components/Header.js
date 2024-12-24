@@ -63,6 +63,7 @@ const Header = () => {
                         <li><Link to="/popular">대세 콘텐츠</Link></li>
                         <li><Link to="/wishlist">내가 찜한 리스트</Link></li>
                         <li><Link to="/search">찾아보기</Link></li>
+                        <li><Link to="/recommended">추천 콘텐츠</Link></li>
                     </ul>
                 </nav>
             </div>

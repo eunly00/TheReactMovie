@@ -67,3 +67,15 @@ npm install axios                 # HTTP 요청용 클라이언트
 
 의존성 설치
 레포지토리를 클론한 뒤, 프로젝트 폴더에서 다음 명령어를 실행하세요.
+
+
+개발서버 실행
+npm run start:dev
+
+프로덕션 서버 실행
+npm run start:prod
+
+개발환경 빌드
+npm run build:dev
+프로덕션 환경 빌드 
+npm run build:prod

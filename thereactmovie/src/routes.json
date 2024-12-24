@@ -1,8 +1,9 @@
 {
-    "home": "/",
-    "setting": "/user/setting",
-    "SignIn": "/user/signin",
-    "dashboard": "/page/dashboard",
-    "search": "/search",
-    "movie": "/movie/:id"
-  }
+  "home": "/",
+  "setting": "/user/setting",
+  "SignIn": "/user/signin",
+  "dashboard": "/page/dashboard",
+  "search": "/search",
+  "movie": "/movie/:id",
+  "recommendations": "/recommendations"
+}

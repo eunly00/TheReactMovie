@@ -7,6 +7,7 @@ import MovieDetailPage from './pages/MovieDetailPage'; // 상세정보 페이지
 import PopularPage from './pages/PopularPage'; // 대세 콘텐츠 페이지 추가
 import SearchPage from './pages/Search';
 import WishlistPage from './pages/Wishlist';
+import RecommendedPage from './pages/RecommendedPage';
 function App() {
     return (
         <Router>
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/popular" element={<PopularPage />} />
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/wishlist" element={<WishlistPage />} />
+                <Route path="/recommended" element={<RecommendedPage />} />
             </Routes>
         </Router>
     );

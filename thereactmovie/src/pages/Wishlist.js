@@ -1,7 +1,7 @@
-// src/pages/WishlistPage.js
 import React, { useEffect, useState } from 'react';
 import MovieCards from '../components/MovieCards';
 import MovieTableView from '../components/MovieTableView';
+import { preparePersonalizeData, downloadCSV } from '../utils/prepareData'; // 유틸 함수 가져오기
 import './WishlistPage.css';
 
 const WishlistPage = () => {
@@ -29,12 +29,24 @@ const WishlistPage = () => {
         localStorage.setItem(`${username}_recommendations`, JSON.stringify(updatedRecommendations));
     };
 
+    const handleDownloadCSV = () => {
+        const data = preparePersonalizeData(); // LocalStorage 데이터를 가져옴
+        if (data.length > 0) {
+            downloadCSV(data); // CSV 다운로드 실행
+        } else {
+            alert('다운로드할 데이터가 없습니다.');
+        }
+    };
+
     return (
         <div className="wishlist-page">
-            <h2>{username}님의 추천 영화 목록</h2>
+            <h2>{username}님의 찜한 영화 목록</h2>
             <div className="view-toggle-container">
                 <button onClick={toggleView} className="view-toggle-button">
                     {isTableView ? '무한 스크롤로 보기' : '테이블로 보기'}
+                </button>
+                <button onClick={handleDownloadCSV} className="csv-download-button">
+                    CSV 다운로드
                 </button>
             </div>
 
