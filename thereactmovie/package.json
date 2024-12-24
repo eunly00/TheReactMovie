@@ -20,14 +20,14 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start:dev": "node copy-env.js && cross-env REACT_APP_ENV=development react-scripts start",
-    "build:dev": "node copy-env.js && cross-env REACT_APP_ENV=development react-scripts build",
-    "start:prod": "node copy-env.js && cross-env REACT_APP_ENV=production react-scripts start",
-    "build:prod": "node copy-env.js && cross-env REACT_APP_ENV=production react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "start:dev": "cross-env REACT_APP_ENV=development react-scripts start",
+    "build:dev": "cross-env REACT_APP_ENV=development react-scripts build",
+    "start:prod": "cross-env REACT_APP_ENV=production react-scripts start",
+    "build:prod": "cross-env REACT_APP_ENV=production react-scripts build"
   },
   "eslintConfig": {
     "extends": [
